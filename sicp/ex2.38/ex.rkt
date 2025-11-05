@@ -1,10 +1,6 @@
 #lang racket
 
-(define (accumulate op initial sequence)
-  (if (null? sequence)
-    initial
-    (op (car sequence)
-	(accumulate op initial (cdr sequence)))))
+(require (only-in "../list-lib.rkt" accumulate))
 
 (define (fold-right op init seq)
   (accumulate op init seq))
@@ -17,7 +13,7 @@
 	    (cdr rest))))
   (iter initial sequence))
 
-; 1/3 / 2 / 1
+; 3 / 2 / 1
 (fold-right / 1 (list 1 2 3))
 ; 1/1 / 2 / 3
 (fold-left / 1 (list 1 2 3))
