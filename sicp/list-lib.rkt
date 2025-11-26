@@ -4,7 +4,9 @@
 	 accumulate-n
 	 fold-right
 	 fold-left
-	 reverse)
+	 reverse
+	 enumerate-interval
+	 flatmap)
 
 (define (accumulate op initial sequence)
   (if (null? sequence)
@@ -31,3 +33,11 @@
 
 (define (reverse seq)
   (fold-left (lambda (x y) (cons y x)) (list) seq))
+
+(define (enumerate-interval low high)
+  (if (> low high)
+    '()
+    (cons low (enumerate-interval (+ low 1) high))))
+
+(define (flatmap proc seq)
+  (accumulate append '() (map proc seq)))
